@@ -37,5 +37,20 @@ public class Exemplo {
 		}
 		npcs.clear();
 	}
+	
+	public void olhar(){
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(main.get(), new Runnable() {
+			public void run(){
+				for (PlayerNPC npc : npcs) {
+					for (Entity en : npc.getBukkitEntity().getNearbyEntities(5.0D, 5.0D, 5.0D)) {
+						if (((en instanceof Player)) && (npc.LookClose)){
+							npc.lookAt(en.getLocation().add(0.0D, 1.0D, 0.0D), npc.getBukkitEntity().getLocation());
+							break;
+						}
+					}
+				}
+			}
+		}, 1L, 1L);
+	}
 
 }
